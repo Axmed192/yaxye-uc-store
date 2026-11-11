@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b35">
+<title>YAXYE UC STORE</title>
+<style>
+:root{--navy:#101b35;--navy2:#172746;--gold:#ffc94a;--gold2:#ffdf86;--muted:#aab6ca;--white:#f7f9ff;--line:rgba(255,255,255,.11)}
+*{box-sizing:border-box}body{margin:0;background:#0b1428;color:var(--white);font-family:Arial,Helvetica,sans-serif}
+header{background:linear-gradient(120deg,#101b35,#20385e);border-bottom:1px solid var(--line);padding:18px 6%;display:flex;align-items:center;justify-content:space-between;gap:14px;position:sticky;top:0;z-index:5}
+.logo{font-size:22px;font-weight:900;letter-spacing:1px}.logo span{color:var(--gold)}
+.tag{font-size:12px;color:var(--muted)}.hero{padding:55px 6% 38px;background:radial-gradient(circle at 85% 20%,#344e79 0,transparent 32%),linear-gradient(120deg,#142544,#0b1428)}
+.hero h1{font-size:clamp(34px,6vw,58px);margin:8px 0 12px;line-height:1.05}.hero h1 span{color:var(--gold)}.hero p{color:#c4cfe0;max-width:600px;line-height:1.6}
+.pill{display:inline-block;border:1px solid rgba(255,201,74,.4);color:var(--gold2);border-radius:30px;padding:8px 13px;font-size:12px;font-weight:bold}
+main{padding:28px 6% 60px;max-width:1200px;margin:auto}.section-title{font-size:23px;margin:15px 0}.section-sub{color:var(--muted);font-size:13px;margin-top:-7px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin:22px 0 34px}
+.card,.panel{background:linear-gradient(145deg,#1a2b4b,#12213d);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 12px 30px rgba(0,0,0,.16)}
+.uc{font-size:27px;font-weight:900}.uc small{font-size:13px;color:var(--muted);font-weight:normal}.price{font-size:24px;color:var(--gold);font-weight:900;margin:12px 0}
+button{border:0;border-radius:11px;background:var(--gold);color:#17213a;padding:12px 17px;font-weight:800;cursor:pointer;width:100%}button:hover{background:var(--gold2)}
+label{display:block;font-size:13px;color:#d6deeb;margin:12px 0 6px}input,select{width:100%;padding:13px;border-radius:10px;border:1px solid var(--line);background:#0d1930;color:white;outline:none}
+input:focus,select:focus{border-color:var(--gold)}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.panel{max-width:760px;margin:0 auto 22px}.note{font-size:12px;color:var(--muted);line-height:1.6}.result{color:var(--gold2);font-size:13px;margin-top:10px;min-height:18px}
+footer{text-align:center;padding:25px;color:var(--muted);border-top:1px solid var(--line);font-size:12px}
+@media(max-width:600px){header{padding:15px 5%}.logo{font-size:18px}.two{grid-template-columns:1fr}.hero{padding:40px 5%}main{padding:22px 5%}}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="logo">YAXYE <span>UC STORE</span></div><div class="tag">PUBG MOBILE UC TOP-UP</div></div>
+  <div class="pill">FAST • SIMPLE • SECURE</div>
+</header>
+<section class="hero">
+  <div class="pill">WELCOME TO YAXYE UC STORE</div>
+  <h1>TOP UP YOUR<br><span>PUBG UC</span></h1>
+  <p>Choose your UC package, enter your PUBG Player ID and send your order through WhatsApp. Prices shown in USD.</p>
+</section>
+<main>
+  <h2 class="section-title">UC Packages</h2>
+  <p class="section-sub">Demo prices based on the starting rate of 60 UC = $1. Confirm the final price before payment.</p>
+  <div class="grid" id="packages">
+    <div class="card"><div class="uc">60 <small>UC</small></div><div class="price">$1.00</div><button onclick="choose(60,1)">Order 60 UC</button></div>
+    <div class="card"><div class="uc">325 <small>UC</small></div><div class="price">$5.42</div><button onclick="choose(325,5.42)">Order 325 UC</button></div>
+    <div class="card"><div class="uc">660 <small>UC</small></div><div class="price">$11.00</div><button onclick="choose(660,11)">Order 660 UC</button></div>
+    <div class="card"><div class="uc">1800 <small>UC</small></div><div class="price">$30.00</div><button onclick="choose(1800,30)">Order 1800 UC</button></div>
+    <div class="card"><div class="uc">3850 <small>UC</small></div><div class="price">$64.17</div><button onclick="choose(3850,64.17)">Order 3850 UC</button></div>
+    <div class="card"><div class="uc">8100 <small>UC</small></div><div class="price">$135.00</div><button onclick="choose(8100,135)">Order 8100 UC</button></div>
+  </div>
+
+  <div class="panel">
+    <h2 class="section-title">Place Your Order</h2>
+    <div class="two">
+      <div><label>PUBG Player ID</label><input id="playerId" placeholder="Enter your Player ID"></div>
+      <div><label>UC Package</label><select id="package"><option value="60|1">60 UC — $1.00</option><option value="325|5.42">325 UC — $5.42</option><option value="660|11">660 UC — $11.00</option><option value="1800|30">1800 UC — $30.00</option><option value="3850|64.17">3850 UC — $64.17</option><option value="8100|135">8100 UC — $135.00</option></select></div>
+    </div>
+    <label>Discount / Referral Code (optional)</label>
+    <input id="discount" placeholder="Enter a code if you have one">
+    <label>Payment method</label>
+    <select id="payment"><option>Ask on WhatsApp</option><option>EVC Plus</option><option>Zaad</option><option>Premier Wallet</option><option>Other</option></select>
+    <p class="note">Your order details will be sent to the store on WhatsApp. Never share your password or verification code.</p>
+    <button onclick="sendOrder()">SEND ORDER ON WHATSAPP</button>
+    <div class="result" id="message"></div>
+  </div>
+
+  <div class="panel">
+    <h2 class="section-title">Your Share Code</h2>
+    <p class="note">Create a shareable code for friends. This sample creates a code in your browser only; it does not register it on a server or automatically apply discounts.</p>
+    <label>Your name or nickname</label><input id="nickname" placeholder="Example: Yaxye">
+    <button style="margin-top:14px" onclick="makeCode()">GENERATE MY CODE</button>
+    <div class="result" id="codeResult"></div>
+  </div>
+</main>
+<footer>© 2026 YAXYE UC STORE • Unofficial independent top-up store. Not affiliated with PUBG MOBILE.</footer>
+<script>
+const WHATSAPP_NUMBER = "252XXXXXXXXX"; // Replace with your WhatsApp number (country code + number, digits only).
+function choose(uc,price){document.getElementById('package').value=uc+'|'+price;document.getElementById('playerId').focus();window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}
+function sendOrder(){
+ const id=document.getElementById('playerId').value.trim();
+ if(!id){document.getElementById('message').textContent='Please enter your PUBG Player ID.';return;}
+ const [uc,price]=document.getElementById('package').value.split('|');
+ const code=document.getElementById('discount').value.trim()||'None';
+ const payment=document.getElementById('payment').value;
+ const msg=`Hello YAXYE UC STORE,%0AI want to order PUBG UC.%0APlayer ID: ${encodeURIComponent(id)}%0APackage: ${uc} UC%0AListed price: $${price}%0ADiscount code: ${encodeURIComponent(code)}%0APayment: ${encodeURIComponent(payment)}%0APlease confirm availability and final price.`;
+ if(WHATSAPP_NUMBER.includes('X')){document.getElementById('message').textContent='Store WhatsApp number is not set yet. Edit WHATSAPP_NUMBER in the HTML file.';return;}
+ window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+msg,'_blank');
+}
+function makeCode(){
+ const name=document.getElementById('nickname').value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);
+ if(!name){document.getElementById('codeResult').textContent='Enter a nickname first.';return;}
+ const suffix=Math.random().toString(36).slice(2,6).toUpperCase();
+ const code='YAX-'+name+'-'+suffix;
+ document.getElementById('codeResult').textContent='Your sample code: '+code;
+}
+</script>
+</body>
+</html>
