@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>YAXYE UC STORE</title>
+
+<style>
+
+*{box-sizing:border-box}
+
+body{
+
+ margin:0;
+
+ font-family:Arial,sans-serif;
+
+ background:#090d18;
+
+ color:white;
+
+}
+
+header{
+
+ background:#111a2c;
+
+ padding:22px;
+
+ text-align:center;
+
+ border-bottom:2px solid #f5bd32;
+
+}
+
+header h1{color:#ffc83d;margin:0}
+
+header p{color:#aaa}
+
+.hero{text-align:center;padding:35px 15px}
+
+.hero h2{font-size:30px;color:#ffc83d}
+
+.hero p{color:#ccc}
+
+.container{max-width:650px;margin:auto;padding:15px}
+
+.card{
+
+ background:#151f32;
+
+ border:1px solid #29364c;
+
+ border-radius:14px;
+
+ padding:20px;
+
+ margin-bottom:15px;
+
+}
+
+input,select{
+
+ width:100%;
+
+ padding:14px;
+
+ margin:8px 0;
+
+ border-radius:8px;
+
+ border:1px solid #46546b;
+
+ background:#0c1424;
+
+ color:white;
+
+ font-size:16px;
+
+}
+
+button{
+
+ width:100%;
+
+ padding:15px;
+
+ background:#f5bd32;
+
+ border:0;
+
+ border-radius:9px;
+
+ font-size:16px;
+
+ font-weight:bold;
+
+ cursor:pointer;
+
+}
+
+.price{color:#ffc83d;font-size:22px;font-weight:bold}
+
+.note{color:#aaa;font-size:13px}
+
+footer{text-align:center;padding:25px;color:#999}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>YAXYE UC STORE</h1>
+
+<p>YOUR TRUSTED UC STORE</p>
+
+</header>
+
+<section class="hero">
+
+<h2>PUBG MOBILE UC</h2>
+
+<p>Fast • Easy • Reliable</p>
+
+</section>
+
+<div class="container">
+
+<div class="card">
+
+<h3>🛒 Order UC</h3>
+
+<label>Select UC Amount</label>
+
+<select id="uc" onchange="calculate()">
+
+<option value="60">60 UC - $1</option>
+
+<option value="120">120 UC - $2</option>
+
+<option value="300">300 UC - $5</option>
+
+<option value="600">600 UC - $10</option>
+
+<option value="1200">1200 UC - $20</option>
+
+<option value="custom">Other Amount</option>
+
+</select>
+
+<input id="custom" type="number"
+
+placeholder="Enter UC amount"
+
+oninput="calculate()" style="display:none">
+
+<p>Total Price: <span class="price" id="price">$1.00</span></p>
+
+</div>
+
+<div class="card">
+
+<h3>🎁 Discount Code</h3>
+
+<input id="promo" placeholder="Enter discount code">
+
+<button onclick="discount()">Apply Code</button>
+
+<p id="message" class="note"></p>
+
+</div>
+
+<div class="card">
+
+<h3>👤 Player Information</h3>
+
+<input id="player" placeholder="PUBG Player ID">
+
+<input id="name" placeholder="Your Name">
+
+</div>
+
+<div class="card">
+
+<h3>💳 Payment Method</h3>
+
+<select id="payment">
+
+<option>EVC Plus</option>
+
+<option>Zaad</option>
+
+<option>Edahab</option>
+
+<option>Other</option>
+
+</select>
+
+<button onclick="order()">ORDER NOW</button>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 YAXYE UC STORE<br>
+
+All Rights Reserved
+
+</footer>
+
+<script>
+
+let total=1;
+
+let discountRate=0;
+
+function calculate(){
+
+ let value=document.getElementById("uc").value;
+
+ let custom=document.getElementById("custom");
+
+ if(value==="custom"){
+
+   custom.style.display="block";
+
+   total=(Number(custom.value)/60);
+
+ }else{
+
+   custom.style.display="none";
+
+   total=Number(value)/60;
+
+ }
+
+ showPrice();
+
+}
+
+function showPrice(){
+
+ let final=total*(1-discountRate);
+
+ document.getElementById("price").innerText=
+
+ "$"+final.toFixed(2);
+
+}
+
+function discount(){
+
+ let code=document.getElementById("promo").value.trim().toUpperCase();
+
+ let message=document.getElementById("message");
+
+ if(code==="YAXYE10"){
+
+   discountRate=0.10;
+
+   message.innerText="Discount 10% applied!";
+
+ }else{
+
+   discountRate=0;
+
+   message.innerText="Invalid discount code.";
+
+ }
+
+ showPrice();
+
+}
+
+function order(){
+
+ let player=document.getElementById("player").value;
+
+ let name=document.getElementById("name").value;
+
+ let payment=document.getElementById("payment").value;
+
+ let uc=document.getElementById("uc").value==="custom"?
+
+ document.getElementById("custom").value:
+
+ document.getElementById("uc").value;
+
+ if(!player||!name||!uc||Number(uc)<=0){
+
+   alert("Please complete all information");
+
+   return;
+
+ }
+
+ let msg=`NEW UC ORDER - YAXYE UC STORE
+
+Name: ${name}
+
+Player ID: ${player}
+
+UC: ${uc}
+
+Total: ${document.getElementById("price").innerText}
+
+Payment: ${payment}`;
+
+ // Replace with your WhatsApp number
+
+ let phone="252613223974";
+
+ window.open("https://wa.me/"+phone+"?text="+
+
+ encodeURIComponent(msg),"_blank");
+
+}
+
+</script>
+
+</body>
+
+</html>
